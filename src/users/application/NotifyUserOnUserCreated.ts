@@ -1,5 +1,4 @@
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { timeout } from 'rxjs';
 import { UserCreatedDomainEvent } from '../domain/UserCreatedDomainEvent';
 
 @EventsHandler(UserCreatedDomainEvent)
