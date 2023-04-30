@@ -22,6 +22,7 @@ export class UserCreator {
   async run({ name, email, password, age }: Params): Promise<void> {
     const user = User.create(v4(), name, email, password, age);
     this.userRepository.persist(user);
+    this.eventPublisher.mergeObjectContext(user);
     user.commit();
   }
 }
