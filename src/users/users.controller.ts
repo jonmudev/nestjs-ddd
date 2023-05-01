@@ -11,7 +11,7 @@ export class UsersController {
   @Post()
   // Commands don´t retrieve anything => Promise<void>
   async createUser(@Body() createRequest: CreateUserDto): Promise<void> {
-    this.commandBus.execute<CreateUserCommand, void>(
+    await this.commandBus.execute<CreateUserCommand, void>(
       new CreateUserCommand(
         createRequest.name,
         createRequest.email,
