@@ -7,6 +7,7 @@ import { UserCreator } from './application/CreateUser/UserCreator';
 import { UserInMemoryRepository } from './infracstructure/UserInMemoryRepository';
 import { UsersController } from './users.controller';
 import { SearchAllQueryHandler } from './application/SearchAll/SearchAllQueryHandler';
+import { SearchByIdQueryHandler } from './application/SearchById/SearchByIdQueryHandler';
 
 @Module({
   imports: [CqrsModule],
@@ -16,6 +17,7 @@ import { SearchAllQueryHandler } from './application/SearchAll/SearchAllQueryHan
     UserInMemoryRepository,
     CreateUserCommandHandler,
     SearchAllQueryHandler,
+    SearchByIdQueryHandler,
     NotifyUserOnUserCreated,
   ],
 })

@@ -8,7 +8,7 @@ import { SearchAllQuery } from './SearchAllQuery';
 export class SearchAllQueryHandler implements IQueryHandler<SearchAllQuery> {
   constructor(private readonly userRepositoy: UserInMemoryRepository) {}
 
-  async execute(query: SearchAllQuery): Promise<UserDto[]> {
+  async execute(): Promise<UserDto[]> {
     return [...this.userRepositoy.findAll()];
   }
 }

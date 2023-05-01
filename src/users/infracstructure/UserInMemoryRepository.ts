@@ -17,7 +17,7 @@ export class UserInMemoryRepository {
     this.users.push(newUser);
   }
 
-  findUserById(id: string): User {
+  findById(id: string): User {
     const user = this.users.find((user) => user.id === id);
     if (!user) throw new BadRequestException(`User with id ${id} not found`);
     return user;
