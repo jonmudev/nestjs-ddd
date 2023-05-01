@@ -1,12 +1,17 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { CommandBus } from '@nestjs/cqrs';
+import { Body, Controller, Get, Post } from '@nestjs/common';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
 
 import { CreateUserDto } from './dto/CreateUserDto';
-import { CreateUserCommand } from './application/CreateUserCommand';
+import { CreateUserCommand } from './application/CreateUser/CreateUserCommand';
+import { UserDto } from './dto/UserDto';
+import { SearchAllQuery } from './application/SearchAll/SearchAllQuery';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly commandBus: CommandBus) {}
+  constructor(
+    private readonly commandBus: CommandBus,
+    private readonly queryBus: QueryBus,
+  ) {}
 
   @Post()
   // Commands don´t retrieve anything => Promise<void>
@@ -19,5 +24,14 @@ export class UsersController {
         createRequest.age,
       ),
     );
+  }
+
+  @Get()
+  // Queries retrieve something => Promise<UserDto[]>
+  async getUsers(): Promise<UserDto[]> {
+    const users = await this.queryBus.execute<SearchAllQuery, UserDto[]>(
+      new SearchAllQuery(),
+    );
+    return users;
   }
 }

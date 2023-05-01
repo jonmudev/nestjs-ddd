@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 
-import { CreateUserCommandHandler } from './application/CreateUserCommandHandler';
+import { CreateUserCommandHandler } from './application/CreateUser/CreateUserCommandHandler';
 import { NotifyUserOnUserCreated } from './application/NotifyUserOnUserCreated';
-import { UserCreator } from './application/UserCreator';
+import { UserCreator } from './application/CreateUser/UserCreator';
 import { UserInMemoryRepository } from './infracstructure/UserInMemoryRepository';
 import { UsersController } from './users.controller';
+import { SearchAllQueryHandler } from './application/SearchAll/SearchAllQueryHandler';
 
 @Module({
   imports: [CqrsModule],
@@ -14,6 +15,7 @@ import { UsersController } from './users.controller';
     UserCreator,
     UserInMemoryRepository,
     CreateUserCommandHandler,
+    SearchAllQueryHandler,
     NotifyUserOnUserCreated,
   ],
 })
