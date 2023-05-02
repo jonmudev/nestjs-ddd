@@ -2,9 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { BadRequestException } from '@nestjs/common';
 
 import { User } from '../domain/User';
+import { UserRepository } from '../domain/UserRepository';
 
 @Injectable()
-export class UserInMemoryRepository {
+export class UserInMemoryRepository implements UserRepository {
   private readonly users: User[];
   constructor() {
     this.users = [];
