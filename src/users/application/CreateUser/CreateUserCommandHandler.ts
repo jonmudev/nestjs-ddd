@@ -9,7 +9,7 @@ export class CreateUserCommandHandler
 {
   constructor(private userCreator: UserCreator) {}
   async execute(command: CreateUserCommand): Promise<void> {
-    const { name, email, password, age } = command;
-    await this.userCreator.run({ name, email, password, age });
+    const { id, name, email, password, age } = command;
+    await this.userCreator.run({ id, name, email, password, age });
   }
 }

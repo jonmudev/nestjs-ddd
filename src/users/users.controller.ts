@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 
 import { CreateUserDto } from './dto/CreateUserDto';
@@ -14,11 +14,15 @@ export class UsersController {
     private readonly queryBus: QueryBus,
   ) {}
 
-  @Post()
+  @Put(':id')
   // Commands don´t retrieve anything => Promise<void>
-  async createUser(@Body() createRequest: CreateUserDto): Promise<void> {
+  async createUser(
+    @Param('id') userId: string,
+    @Body() createRequest: CreateUserDto,
+  ): Promise<void> {
     await this.commandBus.execute<CreateUserCommand, void>(
       new CreateUserCommand(
+        userId,
         createRequest.name,
         createRequest.email,
         createRequest.password,
