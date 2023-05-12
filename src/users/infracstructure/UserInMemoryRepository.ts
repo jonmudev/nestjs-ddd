@@ -12,9 +12,13 @@ export class UserInMemoryRepository implements UserRepository {
   }
 
   persist(newUser: User): void {
-    const user = this.users.find((user) => user.email === newUser.email);
+    const user = this.users.find(
+      (user) => user.email === newUser.email || user.id === newUser.id,
+    );
     if (user)
-      throw new BadRequestException(`${newUser.email} is already in use`);
+      throw new BadRequestException(
+        `email:${newUser.email} or id:${newUser.id} is already in use`,
+      );
     this.users.push(newUser);
   }
 
