@@ -8,6 +8,9 @@ import { UserInMemoryRepository } from './infracstructure/UserInMemoryRepository
 import { UsersController } from './users.controller';
 import { SearchAllQueryHandler } from './application/SearchAll/SearchAllQueryHandler';
 import { SearchByIdQueryHandler } from './application/SearchById/SearchByIdQueryHandler';
+import { UserDeleter } from './application/DeleteUser/UserDeleter';
+import { DeleteUserCommandHandler } from './application/DeleteUser/DeleteUserCommandHandler';
+import { NotifyUserOnUserDeleted } from './application/NotifyUserOnUserDeleted';
 
 @Module({
   imports: [CqrsModule],
@@ -19,6 +22,9 @@ import { SearchByIdQueryHandler } from './application/SearchById/SearchByIdQuery
     SearchAllQueryHandler,
     SearchByIdQueryHandler,
     NotifyUserOnUserCreated,
+    UserDeleter,
+    DeleteUserCommandHandler,
+    NotifyUserOnUserDeleted,
   ],
 })
 export class UsersModule {}

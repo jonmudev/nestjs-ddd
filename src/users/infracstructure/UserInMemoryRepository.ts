@@ -31,4 +31,11 @@ export class UserInMemoryRepository implements UserRepository {
   findAll(): User[] {
     return this.users;
   }
+
+  delete(id: string): void {
+    const user = this.users.find((user) => user.id === id);
+    if (!user) throw new BadRequestException(`User with id ${id} not found`);
+    const index = this.users.indexOf(user);
+    this.users.splice(index, 1);
+  }
 }

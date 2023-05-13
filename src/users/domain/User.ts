@@ -1,4 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
+
 import { UserCreatedDomainEvent } from './UserCreatedDomainEvent';
 
 export class User extends AggregateRoot {

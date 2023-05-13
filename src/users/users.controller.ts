@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Put, Delete } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 
 import { CreateUserDto } from './dto/CreateUserDto';
@@ -6,6 +6,7 @@ import { CreateUserCommand } from './application/CreateUser/CreateUserCommand';
 import { UserDto } from './dto/UserDto';
 import { SearchAllQuery } from './application/SearchAll/SearchAllQuery';
 import { SearchByIdQuery } from './application/SearchById/SearchByIdQuery';
+import { DeleteUserCommand } from './application/DeleteUser/DeleteUserCommand';
 
 @Controller('users')
 export class UsersController {
@@ -28,6 +29,13 @@ export class UsersController {
         createRequest.password,
         createRequest.age,
       ),
+    );
+  }
+
+  @Delete(':id')
+  async deleteUser(@Param('id') userId: string): Promise<void> {
+    await this.commandBus.execute<DeleteUserCommand, void>(
+      new DeleteUserCommand(userId),
     );
   }
 
